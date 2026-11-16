@@ -511,7 +511,7 @@ section.prepm #fl-cards ~ *,section.prepm #alert-card{display:none!important}sec
 .bzf{border-top:1px solid var(--line);padding:7px 0}.bzf>summary{list-style:none;cursor:pointer}.bzf>summary::-webkit-details-marker{display:none}.bzf-h{display:flex;gap:8px;align-items:baseline}.bzf-h b{font-size:15px}.bzf-h span{font-size:13px;font-weight:600}.bzf-m{font-size:12px;color:var(--muted)}.bzs1{font-size:12.5px;padding:4px 0 0 8px}.bzs1 small{color:var(--muted)}
 .bzf-r{display:flex;justify-content:space-between;gap:6px;align-items:center}.bzf-c{font-size:11.5px;color:var(--muted)}.bzf.gone .bzf-h b{color:var(--muted);font-size:13px}
 .hm{padding:24px 20px 12px;display:flex;flex-direction:column;gap:12px}.hm .pl-card{margin:0}.hm-top{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}.hm-top small{font-size:12px;color:var(--muted)}.hm-top h1{margin:2px 0 0;font-size:26px;font-weight:900;line-height:1.2}.hm-top b{font-size:30px;font-weight:900;color:var(--accent);white-space:nowrap}.hm-lb{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.hm-rr{display:flex;align-items:center;gap:4px;font-size:12px}.hm-rr>i{flex:1;border-top:1px dashed var(--line);min-width:6px}.hm-ep{display:flex;flex-direction:column;align-items:center;gap:1px;font-weight:700}.hm-ep small{font-weight:400;color:var(--muted)}.hm-st{display:flex;flex-direction:column;align-items:center;border-radius:10px;padding:5px 9px;font-size:12px}.hm-st b{font-size:13px}.hm-st.a{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}.hm-st.b{background:color-mix(in srgb,#8b5cf6 16%,transparent);color:#7c4ddb}.hm-bar{height:6px;border-radius:3px;background:var(--line);margin:8px 0 10px;overflow:hidden}.hm-bar>i{display:block;height:100%;background:var(--accent);border-radius:3px}.hm-hd{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}.hm-hd b{font-weight:800}.hm-hd span{font-size:13px;color:var(--muted)}.hm-chips{display:flex;flex-wrap:wrap;gap:6px}.hm a.hm-bz{display:flex;flex-direction:row;flex-wrap:nowrap;text-align:left;justify-content:space-between;align-items:center;gap:10px}.hm-bz>div:first-child{flex:1;min-width:0}.hm-bz small{display:block;font-size:12px;color:var(--muted);margin-top:2px}.hm-bz .pr{font-size:22px;font-weight:900;white-space:nowrap;text-align:right}.hm-bz .pr small{text-align:right;font-weight:400}.hm-gs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hm-g{display:flex;flex-direction:column;gap:2px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:inherit;text-decoration:none}.hm-g b{font-size:14px;font-weight:800}.hm-g small{font-size:12px;color:var(--muted)}.hm-gi{color:var(--accent)}a.pl-card{display:block;color:inherit;text-decoration:none}
-</style>
+.htl-bar{display:flex;gap:3px;border-radius:12px;overflow:hidden}.htl-bar>div{display:flex;flex-direction:column;padding:10px 12px;font-size:12px}.htl-bar b{font-size:15px;font-weight:800}.htl-bar .ml{flex:9;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}.htl-bar .sg{flex:3;min-width:84px;background:color-mix(in srgb,#8b5cf6 18%,transparent);color:#7c4ddb}.htl-pts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}.htl-pts>div{display:flex;flex-direction:column;font-size:12.5px;line-height:1.35}.htl-pts .c{align-items:center;text-align:center}.htl-pts .r{align-items:flex-end;text-align:right}.htl-pts i{width:9px;height:9px;border-radius:50%;border:2.5px solid var(--accent);margin-bottom:4px}.htl-pts b{font-size:14px}.htl-pts small{font-size:11.5px;color:var(--muted)}</style>
 <div id="app">
 <div class="note">가이드는 3자 검증(11/9)·보강(11/11) 자료예요. 리조트·호텔 가격은 2026년 조회값이라 예약 전 공식 사이트에서 확인해요. AI 대화는 예시예요.</div>
 <section class="screen" data-screen="home" hidden>
@@ -723,12 +723,18 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   function fitBox(label,s){return s?'<div class="fit">'+ic('heart')+'<div><b>'+esc(label)+'</b> '+hl(s)+'</div></div>':'';}
   // ---- 사진 줄 (위키미디어 공개 사진 여러 장) ----
   var PSC={};try{PSC=JSON.parse(localStorage.getItem('wp_ps1')||'{}');}catch(e){}
+  var CUR={Maldives:['Diamonds_Thudufushi_Beach_and_Water_Villas,_May_2017_-03.jpg','Diamonds_Thudufushi_Beach_and_Water_Villas,_May_2017_-08.jpg','Diamonds_Thudufushi_Beach_and_Water_Villas,_May_2017_-04.jpg','Diamonds_Thudufushi_Beach_and_Water_Villas,_May_2017_-09.jpg','Diamonds_Thudufushi_Beach_and_Water_Villas,_May_2017_-15.jpg','Maldives_island_reflection_in_sea_-_Flickr_-_Mark_Hodson_Photos.jpg'],
+    Singapore:['Marina_Bay_Singapore-3499.jpg','Supertree_Grove,_Gardens_by_the_Bay,_Singapore_-_20120712-02.jpg','Singapore_Marina-Bay-at-night-01.jpg','Singapore_skyline_at_sunset_viewed_from_Gardens_by_the_Bay_East_-_20120426.jpg','Cloud_Forest_-_Gardens_by_the_Bay_-_at_night_seen_from_the_sky_observation_deck_of_Marina_Bay_Sands_Singapore.jpg','Marina_Promenade_Singapore_(4313544585).jpg']};
+  function curUrl(f,w){return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(f)+'?width='+(w||640);}
+  Object.keys(CUR).forEach(function(k){PSC['cur:'+k]=CUR[k].map(function(f){return curUrl(f,640);});});
+
   var RW={'dolomites|코르티나 담페초':"Cortina_d'Ampezzo",'dolomites|발 가르데나 (오르티세이)':'Val_Gardena','dolomites|알타 바디아':'Alta_Badia',
     'maldives|북말레':'North_Malé_Atoll','maldives|남말레':'South_Malé_Atoll','maldives|아리':'Ari_Atoll','maldives|바아':'Baa_Atoll','maldives|라아':'Raa_Atoll','maldives|누누':'Noonu_Atoll','maldives|다알루':'Dhaalu_Atoll',
     'hawaii|오아후':'Oahu','hawaii|마우이':'Maui','hawaii|카우아이':'Kauai','hawaii|빅아일랜드':'Hawaii_(island)'};
   var CW={rome:'Rome',florence:'Florence',venice:'Venice',milan:'Milan',naples:'Naples',dolomites:'Dolomites',maldives:'Maldives',hawaii:'Hawaii'};
   function bigStrip(wk,label){return wk?pstrip(wk,label).replace('<div class="ps"','<div class="ps big" data-pn="10"'):'';}
   function pstrip(wk,label,q,note){
+    if(wk&&CUR[wk])wk='cur:'+wk;
     if(!wk)return q?'<a class="ps-none" href="https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q)+'" target="_blank" rel="noopener noreferrer">'+ic('cam')+'<span>사진 검색해서 보기 &#8599;</span></a>':'';
     return '<div class="ps" data-ps="'+esc(wk)+'" data-pl="'+esc(label)+'"><span class="ps-sk"></span><span class="ps-sk"></span><span class="ps-sk"></span></div>'+(note?'<div class="ps-note">'+esc(note)+'</div>':'');
   }
@@ -1111,6 +1117,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     });
   }
   function openGallery(k,title){
+    if(k.indexOf('cur:')===0){var cf=CUR[k.slice(4)]||[],ov0=document.createElement('div');ov0.className='gal';ov0.innerHTML='<div class="gal-in"><div class="gal-h"><b>'+esc(title||'')+'</b><button class="gal-x" aria-label="닫기">✕</button></div><div class="gal-g">'+cf.map(function(f){return '<a href="https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(f)+'" target="_blank" rel="noopener"><img src="'+curUrl(f,1000)+'" alt="" loading="lazy" referrerpolicy="no-referrer"></a>';}).join('')+'</div><div class="gal-f muted">사진: Wikimedia Commons. 사진을 누르면 원본과 저작권 정보가 나와요.</div></div>';document.body.appendChild(ov0);ov0.addEventListener('click',function(e){if(e.target===ov0||e.target.className==='gal-x')ov0.parentNode.removeChild(ov0);});return;}
     var ov=document.createElement('div');ov.className='gal';
     ov.innerHTML='<div class="gal-in"><div class="gal-h"><b>'+esc(title||k.replace(/_/g,' '))+'</b><button class="gal-x" aria-label="닫기">✕</button></div><div class="gal-g"><div class="muted">사진을 불러오는 중이에요…</div></div><div class="gal-f muted">사진: Wikipedia·Wikimedia Commons. 사진을 누르면 원본과 저작권 정보가 나와요.</div></div>';
     document.body.appendChild(ov);
@@ -2021,12 +2028,9 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   }
   function mleGuide(){
     var sg=D.cities.singapore||{},ml=D.cities.maldives;
-    var tl='<div class="pl-card"><h3>'+ic('cal')+' 우리 일정</h3><div class="tline">'
-      +'<div><b>10/11</b><span>인천 출국</span><small>비즈니스 편도 · 싱가포르 환승</small></div>'
-      +'<div class="seg ml"><b>몰디브 9박</b><span>10/11 ~ 10/20</span></div>'
-      +'<div><b>10/20</b><span>말레 → 싱가포르</span><small>귀국 다구간 1구간</small></div>'
-      +'<div class="seg sg"><b>싱가포르 2박</b><span>10/20 ~ 10/22</span></div>'
-      +'<div><b>10/22</b><span>싱가포르 → 인천</span><small>귀국 다구간 2구간</small></div></div></div>';
+    var tl='<div class="pl-card"><h3>'+ic('cal')+' 우리 일정</h3><div class="htl">'
+      +'<div class="htl-bar"><div class="ml"><b>몰디브</b><span>9박 · 10/11-10/20</span></div><div class="sg"><b>싱가포르</b><span>2박</span></div></div>'
+      +'<div class="htl-pts"><div><i></i><b>10/11</b><span>인천 출국</span><small>싱가포르 환승</small></div><div class="c"><i></i><b>10/20</b><span>말레→싱가포르</span><small>귀국 1구간</small></div><div class="r"><i></i><b>10/22</b><span>인천 귀국</span><small>귀국 2구간</small></div></div></div></div>';
     function dest(k,c,sub,links){return '<div class="pl-card dest"><a class="isl-h" href="#city-'+k+'"><div><div class="rg-n" style="font-size:22px">'+esc(c.n)+' <span class="rg-en">'+esc(c.en)+'</span></div><div class="muted" style="font-size:13px">'+sub+'</div></div><span class="back" style="margin:0">자세히 &rarr;</span></a>'+bigStrip(c.wk||c.en,c.n)
       +'<div class="mtiles">'+links.map(function(t){return '<a href="'+t[0]+'"'+(t[3]?' data-ptgo="'+t[3]+'"':'')+'>'+ic(t[1],18)+'<span>'+t[2]+'</span></a>';}).join('')+'</div></div>';}
     return '<div class="mleh"><div class="muted" style="font-size:12px">2027.10.11 – 10.22 · 신혼여행 확정</div><h1 style="margin:2px 0 4px">몰디브 · 싱가포르</h1><div class="muted">리조트에서 9박, 돌아오는 길에 싱가포르 2박</div></div>'
