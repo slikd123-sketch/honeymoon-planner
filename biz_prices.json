@@ -1,0 +1,76 @@
+{
+ "ver": 2,
+ "route": "ICN-MLE",
+ "date": "2027-10-11",
+ "cabin": "business",
+ "per": "1인 편도",
+ "currency": "KRW",
+ "rule": "에티하드·싱가포르·대한항공(연결편 포함) · 16시간 미만 · 인천 13:00 전 출발",
+ "days": [
+  {
+   "d": "2026-11-16",
+   "t": "21:27",
+   "n_all": 11,
+   "all_airlines": [
+    "말레이항공",
+    "스리랑카항공",
+    "싱가포르항공",
+    "에미레이트항공",
+    "에바항공",
+    "에어인디아",
+    "에티하드항공"
+   ],
+   "min": 2170339,
+   "prices": {
+    "SQ 611 + SQ 438": 2170339
+   },
+   "level": null,
+   "typical": null,
+   "left": 250
+  }
+ ],
+ "flights": {
+  "SQ 611 + SQ 438": {
+   "first": "2026-11-16",
+   "airlines": [
+    "싱가포르항공"
+   ],
+   "stops": 1,
+   "total_min": 885,
+   "via": [
+    "SIN"
+   ],
+   "layover_min": [
+    230
+   ],
+   "overnight": false,
+   "segs": [
+    {
+     "no": "SQ 611",
+     "airline": "싱가포르항공",
+     "from": "ICN",
+     "dep": "2027-10-11 11:05",
+     "to": "SIN",
+     "arr": "2027-10-11 16:35",
+     "plane": "Airbus A350",
+     "cls": "Business Class",
+     "min": 390
+    },
+    {
+     "no": "SQ 438",
+     "airline": "싱가포르항공",
+     "from": "SIN",
+     "dep": "2027-10-11 20:25",
+     "to": "MLE",
+     "arr": "2027-10-11 21:50",
+     "plane": "Airbus A350",
+     "cls": "Business Class",
+     "min": 265
+    }
+   ],
+   "last": "2026-11-16"
+  }
+ },
+ "google_history": [],
+ "updated": "2026-11-16 21:27"
+}
