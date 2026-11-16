@@ -510,32 +510,12 @@ section.prepm #fl-cards ~ *,section.prepm #alert-card{display:none!important}sec
 .tyb{position:relative;height:12px;background:var(--bg);border-radius:6px;margin-top:4px}.tyb i{position:absolute;top:0;height:100%;background:var(--ok-bg);border:1px solid var(--ok);border-radius:6px}.tyb b{position:absolute;top:-3px;width:4px;height:18px;margin-left:-2px;background:var(--accent);border-radius:2px}.tyl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
 .bzf{border-top:1px solid var(--line);padding:7px 0}.bzf>summary{list-style:none;cursor:pointer}.bzf>summary::-webkit-details-marker{display:none}.bzf-h{display:flex;gap:8px;align-items:baseline}.bzf-h b{font-size:15px}.bzf-h span{font-size:13px;font-weight:600}.bzf-m{font-size:12px;color:var(--muted)}.bzs1{font-size:12.5px;padding:4px 0 0 8px}.bzs1 small{color:var(--muted)}
 .bzf-r{display:flex;justify-content:space-between;gap:6px;align-items:center}.bzf-c{font-size:11.5px;color:var(--muted)}.bzf.gone .bzf-h b{color:var(--muted);font-size:13px}
+.hm{padding:24px 20px 12px;display:flex;flex-direction:column;gap:12px}.hm .pl-card{margin:0}.hm-top{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}.hm-top small{font-size:12px;color:var(--muted)}.hm-top h1{margin:2px 0 0;font-size:26px;font-weight:900;line-height:1.2}.hm-top b{font-size:30px;font-weight:900;color:var(--accent);white-space:nowrap}.hm-lb{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.hm-rr{display:flex;align-items:center;gap:4px;font-size:12px}.hm-rr>i{flex:1;border-top:1px dashed var(--line);min-width:6px}.hm-ep{display:flex;flex-direction:column;align-items:center;gap:1px;font-weight:700}.hm-ep small{font-weight:400;color:var(--muted)}.hm-st{display:flex;flex-direction:column;align-items:center;border-radius:10px;padding:5px 9px;font-size:12px}.hm-st b{font-size:13px}.hm-st.a{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}.hm-st.b{background:color-mix(in srgb,#8b5cf6 16%,transparent);color:#7c4ddb}.hm-bar{height:6px;border-radius:3px;background:var(--line);margin:8px 0 10px;overflow:hidden}.hm-bar>i{display:block;height:100%;background:var(--accent);border-radius:3px}.hm-hd{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}.hm-hd b{font-weight:800}.hm-hd span{font-size:13px;color:var(--muted)}.hm-chips{display:flex;flex-wrap:wrap;gap:6px}.hm a.hm-bz{display:flex;flex-direction:row;flex-wrap:nowrap;text-align:left;justify-content:space-between;align-items:center;gap:10px}.hm-bz>div:first-child{flex:1;min-width:0}.hm-bz small{display:block;font-size:12px;color:var(--muted);margin-top:2px}.hm-bz .pr{font-size:22px;font-weight:900;white-space:nowrap;text-align:right}.hm-bz .pr small{text-align:right;font-weight:400}.hm-gs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hm-g{display:flex;flex-direction:column;gap:2px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:inherit;text-decoration:none}.hm-g b{font-size:14px;font-weight:800}.hm-g small{font-size:12px;color:var(--muted)}.hm-gi{color:var(--accent)}a.pl-card{display:block;color:inherit;text-decoration:none}
 </style>
 <div id="app">
 <div class="note">가이드는 3자 검증(11/9)·보강(11/11) 자료예요. 리조트·호텔 가격은 2026년 조회값이라 예약 전 공식 사이트에서 확인해요. AI 대화는 예시예요.</div>
 <section class="screen" data-screen="home" hidden>
-<div style="padding:28px 20px 8px;display:flex;flex-direction:column;gap:6px">
-<div style="font-size:12px;color:var(--muted);letter-spacing:0.04em">신혼여행 · 2027.10.11 – 10.22 · 몰디브 9박 + 싱가포르 2박</div>
-<h1 style="margin:0;font-size:30px;line-height:1.2;font-weight:900">신혼여행 플래너</h1>
-<div style="font-size:14px;line-height:1.6;color:var(--muted)">몰디브 리조트 9박과 싱가포르 2박, 둘만의 신혼여행을 준비하는 계획 도우미예요.</div>
-</div>
-<div class="pl" style="padding-top:8px;padding-bottom:0">
-<div id="home-prep-top"></div>
-<div class="pl-card"><h3>이 앱은 어떤 도우미인가요</h3>
-<ul class="pts"><li><span class="lb ac">준비</span><span>예약 현황과 마감일 있는 할 일을 챙겨요</span></li><li><span class="lb ac">정리</span><span>여행지와 숙소를 출처와 함께 모아요</span></li><li><span class="lb ac">여행 중</span><span>오늘 일정·서류·긴급연락처를 한 화면에</span></li><li><span class="lb">결정</span><span>고르기와 예약 전 확인은 둘이 직접 해요</span></li></ul></div>
-<div class="pl-card"><h3>이렇게 쓰면 좋아요</h3>
-<ul>
-<li><b>준비</b> 출국 날짜를 정하고, 예약 현황판과 할 일 타임라인으로 빠진 것 없이 챙겨요.</li>
-<li><b>여행지</b> 몰디브 여행 전 유의사항과 지역, 싱가포르에서 할 것을 봐요.</li>
-<li><b>숙소</b> 리조트 고르는 법을 보고, 등급별 리조트를 비교해 ♡를 눌러요.</li>
-<li><b>일정</b> 날짜별 계획을 적고, ♥ 둘의 후보에서 둘이 ♡한 곳을 맞춰 봐요.</li>
-<li><b>AI</b> 지금까지 담은 내용을 AI에게 넘겨 색다른 제안을 받아요. 채팅 연결은 준비 중이에요.</li>
-</ul></div>
-<details class="pl-card hd"><summary>정보 검증 기준 (3차 완료 · 11/9)</summary><div class="vck"><div><b>848</b><span>확인한 항목</span></div><div><b>617</b><span>출처</span></div><div class="ok"><b>521</b><span>일치</span></div><div class="fx"><b>101</b><span>고침</span></div><div class="wk"><b>226</b><span>약함·미확인</span></div></div><ul class="pts"><li><span class="lb ok">3차</span><span>앱 내용을 처음 보는 검증자 7명(몰디브 기본정보·다이닝·리조트 4성·5성·럭셔리·싱가포르·항공)이 항목마다 서로 다른 출처 2곳 이상으로 다시 확인했어요</span></li><li><span class="lb ok">고침</span><span>틀린 값은 고쳤고(예: 10월 강수량, 수상비행기 짐 한도, 이동비, 하니파루 시즌, 싱가포르 택시비), 리조트 가격은 객실·올인클·패키지로 나눴어요</span></li><li><span class="lb">약함</span><span>출처가 1곳뿐이거나 출처끼리 다른 값은 화면에 조건·날짜를 같이 적었어요</span></li><li><span class="lb">5</span><span>가격·운항 시간은 2026년 조회값이라 2027년 10월엔 달라질 수 있어요. 예약 전 공식 사이트 확인이 필요해요</span></li></ul></details>
-<details class="pl-card hd"><summary>표시 읽는 법</summary>
-<ul class="pts"><li><span class="lb ok">조사</span><span>웹에서 확인한 자료</span></li><li><span class="lb">공개자료 확인</span><span>공개 자료로 확인한 일반 정보예요</span></li><li><span class="lb">예시</span><span>구성을 보여주려고 임의로 넣은 값</span></li><li><span class="lb ok">실제 수집</span><span>항공 가격을 직접 모은 값</span></li></ul></details>
-<div id="home-prep"></div>
-</div>
+<div class="hm"><div class="hm-top"><div><small>2027.10.11 – 10.22 · 11박</small><h1>신혼여행 플래너</h1></div><b id="home-dd"></b></div><div class="pl-card hm-rt" aria-label="여정"><small class="hm-lb">여정</small><div class="hm-rr"><div class="hm-ep"><span data-ic="plane"></span>인천<small>10/11</small></div><i></i><div class="hm-st a"><b>몰디브</b>9박</div><i></i><div class="hm-st b"><b>싱가포르</b>2박</div><i></i><div class="hm-ep"><span data-ic="plane"></span>인천<small>10/22</small></div></div></div><div id="home-prep-top"></div><div id="home-biz"></div><div class="hm-gs"><a class="hm-g" href="#places"><span class="hm-gi" data-ic="map"></span><b>여행지</b><small>유의사항·지도</small></a><a class="hm-g" href="#stay"><span class="hm-gi" data-ic="bed"></span><b>숙소</b><small>리조트 비교</small></a><a class="hm-g" href="#sched"><span class="hm-gi" data-ic="cal"></span><b>일정</b><small>날짜별 계획</small></a><a class="hm-g" href="#chat"><span class="hm-gi" data-ic="spark"></span><b>AI 상담</b><small>물어보기</small></a></div></div>
 </section>
 <section class="screen" data-screen="places" hidden>
 <div class="pl" style="padding-top:28px">
@@ -2060,7 +2040,6 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     if(ARCH()){sc.classList.remove('focus');if(g)g.remove();var bb=document.getElementById('arch-back');if(!bb){bb=document.createElement('div');bb.id='arch-back';bb.innerHTML='<button type="button" class="btn" data-arch="0" style="width:100%;margin:12px 0">'+ic('check',15)+' 몰디브 화면으로 돌아가기</button>';sc.insertBefore(bb,sc.firstChild);}return;}
     var ab=document.getElementById('arch-back');if(ab)ab.remove();
     sc.classList.add('focus');if(!g){g=document.createElement('div');g.id='mle-guide';sc.insertBefore(g,sc.firstChild);}g.innerHTML=mleGuide();
-    var hm=document.querySelector('[data-screen=home] > div');if(hm&&!document.getElementById('home-mle')){var d=document.createElement('a');d.id='home-mle';d.href='#places';d.className='pl-card homemle';d.innerHTML='<div><small>신혼여행지 확정</small><b>몰디브 '+ic('heart',16)+'</b><span>리조트 고르기 · 이동비 · 총예산</span></div><span class="arrow">&rarr;</span>';hm.appendChild(d);}
   }
   document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-arch]');if(!a)return;try{localStorage.setItem('wp_arch',a.getAttribute('data-arch'));}catch(_){}applyFocus();window.scrollTo(0,0);if(location.hash!=='#places')location.hash='#places';});
   window.addEventListener('hashchange',function(){if(location.hash==='#places'||location.hash==='')setTimeout(applyFocus,0);});
@@ -2098,14 +2077,22 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var tl='<div class="pl-card"><h3>'+ic('cal')+' 할 일 타임라인</h3><div class="tl4">'+T.map(function(x){var past=x[0]<now,ok=x[3]&&(o[x[3]]||{}).s===2;return '<div class="'+(ok?'ok':past?'due':'')+'"><em>'+x[0].getFullYear()+'. '+ymd(x[0])+(ok?' · 완료':past?' · 지금 할 때':'')+'</em><b>'+esc(x[1])+'</b>'+(x[2]?'<small>'+esc(x[2])+'</small>':'')+'</div>';}).join('')+'</div></div>';
     var links='<div class="pl-card"><h3>'+ic('money')+' 예산</h3><a class="back" style="margin:0" href="#saved">최종 결정에서 총예산 보기 &rarr;</a></div>';
     return hero+board+tl+links;}
-  function homePrep(){var el=document.getElementById('home-prep-top');if(!el)return;var BK=BKL(),o=bkGet(),dep='1011';try{dep=localStorage.getItem('wp_dep')==='1010'?'1010':'1011';}catch(e){}
-    var start=new Date(2027,9,dep==='1010'?10:11),dd=Math.ceil((start-new Date())/86400000),done=BK.filter(function(b){return (o[b[0]]||{}).s===2;}).length;
-    var next=BK.filter(function(b){return (o[b[0]]||{}).s!==2;}).slice(0,3);
-    el.innerHTML='<a class="pl-card prh" href="#flights" style="text-decoration:none;color:inherit"><div><small>출발까지</small><b>D-'+dd+'</b><span>예약 '+done+' / '+BK.length+' 완료</span></div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">'+next.map(function(b){return '<span class="cxi sm">'+ic(b[3],12)+esc(b[1])+'</span>';}).join('')+'<span class="back" style="margin:0">준비 현황 &rarr;</span></div></a>';}
+  function homePrep(){var BK=BKL(),o=bkGet(),dep='1011';try{dep=localStorage.getItem('wp_dep')==='1010'?'1010':'1011';}catch(e){}
+    var start=new Date(2027,9,dep==='1010'?10:11),dd=Math.ceil((start-new Date())/86400000);
+    var dEl=document.getElementById('home-dd');if(dEl)dEl.textContent=dd>0?'D-'+dd:(dd===0?'D-DAY':'여행 중');
+    document.querySelectorAll('[data-ic]').forEach(function(x){if(!x.firstChild)x.innerHTML=ic(x.getAttribute('data-ic'),x.closest('.hm-g')?20:16);});
+    var el=document.getElementById('home-prep-top');if(el){var done=BK.filter(function(b){return (o[b[0]]||{}).s===2;}).length,next=BK.filter(function(b){return (o[b[0]]||{}).s!==2;}).slice(0,3),pc=Math.round(done*100/BK.length);
+      el.innerHTML='<a class="pl-card" href="#flights" data-hgo="_prep"><div class="hm-hd"><b>준비 현황</b><span>준비 '+done+' / '+BK.length+'</span></div><div class="hm-bar"><i style="width:'+Math.max(pc,3)+'%"></i></div><div class="hm-chips">'+(next.length?next.map(function(b){return '<span class="cxi sm">'+ic(b[3],12)+esc(b[1])+'</span>';}).join(''):'<span class="cxi sm">'+ic('check',12)+'모두 완료</span>')+'</div></a>';}
+    homeBiz();}
+  function homeBiz(){var el=document.getElementById('home-biz');if(!el)return;bizLoad();var j=BIZ,P=j&&j.days?j.days.filter(function(d){return d.min;}):[],L=P[P.length-1];
+    var body=L?'<div class="pr">'+wonM(L.min)+'<small>인당 편도</small></div>':'<div class="pr"><small>'+(BIZST===3?'불러오지 못했어요':'불러오는 중')+'</small></div>';
+    el.innerHTML='<a class="pl-card hm-bz" href="#flights" data-hgo="_biz"><div><b style="font-size:14px;font-weight:800">비즈니스 출국편 최저가</b><small>인천→말레'+(L?' · '+L.d.slice(5).replace('-','/')+' 기준 · 조건 맞는 '+Object.keys(L.prices||{}).length+'편':'')+'</small></div>'+body+'</a>';}
+  window.homeBiz=homeBiz;
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-hgo]');if(!a)return;FCITY=a.getAttribute('data-hgo');setTimeout(function(){if(window.renderFlightCards)window.renderFlightCards();},30);});
   window.addEventListener('hashchange',function(){if(!location.hash||location.hash==='#home')homePrep();});setTimeout(homePrep,50);
   // ---- v17: 10/11 비즈니스 가격 모니터링 (biz_prices.json) ----
   var BIZ=null,BIZST=0;
-  function bizLoad(){if(BIZST)return;BIZST=1;fetch('biz_prices.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){BIZ=j;BIZST=2;if(FCITY==='_biz'&&window.renderFlightCards)window.renderFlightCards();}).catch(function(){BIZST=3;if(FCITY==='_biz'&&window.renderFlightCards)window.renderFlightCards();});}
+  function bizLoad(){if(BIZST)return;BIZST=1;fetch('biz_prices.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){BIZ=j;BIZST=2;if(window.homeBiz)window.homeBiz();if(FCITY==='_biz'&&window.renderFlightCards)window.renderFlightCards();}).catch(function(){BIZST=3;if(window.homeBiz)window.homeBiz();if(FCITY==='_biz'&&window.renderFlightCards)window.renderFlightCards();});}
   function wonM(v){return v==null?'-':(Math.round(v/1000)/10).toLocaleString()+'만원';}
   function hmin(m){return m?Math.floor(m/60)+'시간'+(m%60?' '+(m%60)+'분':''):'';}
   function bizChart(days){var P=days.filter(function(d){return d.min;});if(P.length<2)return '<div class="muted" style="font-size:12px">이틀 이상 모이면 그래프가 그려져요.</div>';
