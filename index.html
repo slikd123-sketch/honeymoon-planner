@@ -2400,7 +2400,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var f=F[K],s=f.segs||[],now=(last.prices||{})[K],pv=prev?(prev.prices||{})[K]:null;
     var hist=DD.map(function(d){return (d.prices||{})[K];}).filter(Boolean),lo=hist.length?Math.min.apply(null,hist):null;
     var dv=(now!=null&&pv!=null)?now-pv:null;
-    var chg=dv==null?'<span class="muted">어제 값 없음 (수집 '+DD.length+'일째)</span>':dv===0?'<span class="muted">어제와 같아요</span>':'<span class="'+(dv<0?'okt':'wnt')+'">어제보다 '+(dv<0?'▼ ':'▲ ')+wonM(Math.abs(dv))+'</span>';
+    var chg=now==null?'<span class="wnt">오늘 검색 결과에 이 편이 안 나왔어요</span>'+(pv?'<small>어제 '+wonM(pv)+'</small>':''):dv==null?'<span class="muted">어제 값 없음 (수집 '+DD.length+'일째)</span>':dv===0?'<span class="muted">어제와 같아요</span>':'<span class="'+(dv<0?'okt':'wnt')+'">어제보다 '+(dv<0?'▼ ':'▲ ')+wonM(Math.abs(dv))+'</span>';
     var t=function(x){return String(x||'').slice(11,16);};
     var AP={ICN:'인천',SIN:'싱가포르',MLE:'말레'};
     var leg=function(g){return '<div class="mfl"><div class="mfl-t"><b>'+t(g.dep)+'</b><i></i><b>'+t(g.arr)+'</b></div><div class="mfl-a"><div><b>'+(AP[g.from]||g.from)+'</b> <small>'+g.from+'</small></div><div class="mfl-n">'+esc(g.no)+' · '+hmm(g.min)+' · '+esc(g.plane||'')+'</div><div><b>'+(AP[g.to]||g.to)+'</b> <small>'+g.to+'</small></div></div></div>';};
