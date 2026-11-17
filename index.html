@@ -2408,7 +2408,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var out='<div class="pl-card mf"><div class="mf-h"><span class="mf-tag on">'+ic('spark',12)+' 매일 가격 확인 중</span><b>출국 · 10/11 (월)</b><small>인천 → 싱가포르 → 말레 · 비즈니스 · 1인 편도</small></div>'
       +'<div class="mf-p"><div><b>'+(now?wonM(now):'오늘 안 보임')+'</b><small>1인 · 2인이면 '+(now?wonM(now*2):'-')+'</small></div><div class="mf-c">'+chg+(lo&&hist.length>1?'<small>지금까지 최저 '+wonM(lo)+'</small>':'')+'</div></div>'
       +segs
-      +'<div class="mf-f"><span>총 '+hmm(f.total_min)+'</span><span>말레 밤 '+t((s[s.length-1]||{}).arr)+' 도착</span><a href="#stay-maldives">첫날 밤 입실 리조트 보기 &rarr;</a></div>'
+      +'<div class="mybtn" style="margin:4px 0"><a class="pbtn" href="https://flight.naver.com/flights/international/ICN-MLE-20271011?adult=1&fareType=C" target="_blank" rel="noopener noreferrer">네이버 항공권에서 같은 조건 보기 &#8599;</a></div>'+'<div class="mf-f"><span>총 '+hmm(f.total_min)+'</span><span>말레 밤 '+t((s[s.length-1]||{}).arr)+' 도착</span><a href="#stay-maldives">첫날 밤 입실 리조트 보기 &rarr;</a></div>'
       +(DD.length>1?'<details class="rmore"><summary>날짜별 가격 그래프</summary>'+bizChart(DD)+'</details>':'')
       +'<div class="muted" style="font-size:12px">마지막 확인 '+esc((BIZ.updated||'').slice(5).replace('-','/'))+' · 매일 1번 자동으로 구글 항공권 가격을 모아요</div></div>';
     var ret='<div class="pl-card mf"><div class="mf-h"><span class="mf-tag">예약 전 · 가격 확인 안 함</span><b>귀국 · 다구간 1장</b><small>이코노미 · 예산 1인 약 90만원으로 잡아 둠</small></div>'
