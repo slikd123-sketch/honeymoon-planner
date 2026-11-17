@@ -1,5 +1,5 @@
 // 신혼여행 플래너 서비스워커: 항상 최신을 먼저 받아 보고, 오프라인이면 마지막으로 본 화면을 보여줘요.
-const CACHE = 'honeymoon-v1';
+const CACHE = 'honeymoon-v2';
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
@@ -10,7 +10,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
   e.respondWith(
-    fetch(req).then(res => {
+    fetch(req, {cache: (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/')) ? 'no-store' : 'default'}).then(res => {
       if (res && res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
       return res;
     }).catch(() => caches.match(req).then(r => r || caches.match('./')))
