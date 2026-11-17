@@ -1123,7 +1123,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var gm='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
     var light=LIGHT.test(e.type||'');var ft=(light?'light':'meal')+(e.honeymoon?' mood':'');var _ia=String(e.area||'');[['오아후','oahu'],['마우이','maui'],['카우아이','kauai'],['빅아일랜드','bigisland']].forEach(function(z){if(_ia.indexOf(z[0])===0)ft+=' i-'+z[1];});
     var own=wkOf(e.name),dish=null;(e.links_menu||[]).forEach(function(m){if(!dish&&WK[k+'|'+m])dish=[m,WK[k+'|'+m]];});
-    var strip=(e.ph&&e.ph.length)?'<div class="eph">'+e.ph.map(function(x){return '<figure><img loading="lazy" src="'+esc(x[0])+'" alt="'+esc((e.ko||e.name)+' '+x[1])+'"><figcaption>'+esc(x[1])+'</figcaption></figure>';}).join('')+'</div><div class="muted" style="font-size:12px">사진: 미쉐린 가이드</div>':own?pstrip(own,e.name):(dish?pstrip(dish[1],dish[0],'','메뉴 예시 사진 · '+dish[0]+' (이 가게 사진은 아니에요)'):'<a class="ps-none" href="'+gm+'" target="_blank" rel="noopener noreferrer">'+ic('cam')+'<span>가게·음식 사진은 구글 지도에서 보기 &#8599;</span></a>');
+    var strip=(e.ph&&e.ph.length)?'<div class="eph">'+e.ph.map(function(x){return '<figure><img loading="lazy" referrerpolicy="no-referrer" src="'+esc(x[0])+'" alt="'+esc((e.ko||e.name)+' '+x[1])+'"><figcaption>'+esc(x[1])+'</figcaption></figure>';}).join('')+'</div><div class="muted" style="font-size:12px">사진: 미쉐린 가이드</div>':own?pstrip(own,e.name):(dish?pstrip(dish[1],dish[0],'','메뉴 예시 사진 · '+dish[0]+' (이 가게 사진은 아니에요)'):'<a class="ps-none" href="'+gm+'" target="_blank" rel="noopener noreferrer">'+ic('cam')+'<span>가게·음식 사진은 구글 지도에서 보기 &#8599;</span></a>');
     var kv='';
     var mpl=(e.mp||[]).filter(function(x){return x.price;});
     if(!mpl.length&&e.dishes&&e.dishes.length)kv+='<b>대표</b><span>'+e.dishes.map(esc).join(' · ')+'</span>';
@@ -1609,7 +1609,8 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
        +'<input class="memo" data-memo="'+esc(it.id)+'" value="'+esc((it.m&&it.m[me])||'')+'" placeholder="내 메모 (예: 욕조 사진 더 보기)" aria-label="내 메모">'
        +((it.m&&it.m[ot])?'<div class="muted">'+WHO[ot]+' 메모: '+esc(it.m[ot])+'</div>':'')+'</div>';
     }).join(''):'<div class="pl-card" style="border-style:dashed"><div class="muted">아직 담은 곳이 없어요. 도시, 숙소, 가볼 곳, 먹을 것, 맛집 옆의 ♡를 누르면 여기에 모여요.</div></div>';
-    return who+syncCard()+stat+(SYNC_ON()?'':sync)+'<div class="muted" style="font-size:12.5px">둘 다 ♥한 곳이 맨 위로 올라와요.</div>'+list;
+    var setup=who+syncCard()+(SYNC_ON()?'':sync);
+    return (picked?'':who)+stat+'<div class="muted" style="font-size:12.5px">둘 다 ♥한 곳이 맨 위로 올라와요.</div>'+list+'<details class="pl-card rmore"'+(picked?'':' hidden')+'><summary>'+ic('people',15)+' 설정 · 둘이 같이 보기</summary>'+(picked?setup:syncCard()+(SYNC_ON()?'':sync))+'</details>';
   }
   function bindSaved(box){
     box.querySelectorAll('[data-me]').forEach(function(b){b.onclick=function(){sdb('wp_me',b.getAttribute('data-me'));window.renderPlan();};});
@@ -1824,7 +1825,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   // ---- v19: 빌라 종류 · 지역 지도 · 올인클 리스트 ----
   var SVGW='<svg viewBox="0 0 120 70" class="vill"><rect x="0" y="44" width="120" height="26" fill="#7fd3e0"/><path d="M0 50q10-3 20 0t20 0t20 0t20 0t20 0t20 0" stroke="#fff" stroke-width="1.5" fill="none" opacity=".7"/><g stroke="#8a6a4a" stroke-width="2"><line x1="38" y1="36" x2="38" y2="60"/><line x1="82" y1="36" x2="82" y2="60"/><line x1="60" y1="36" x2="60" y2="60"/></g><rect x="30" y="30" width="60" height="7" fill="#c9a77a"/><rect x="38" y="16" width="44" height="15" fill="#f6efe2" stroke="#8a6a4a"/><path d="M33 17 60 4 87 17z" fill="#b8874f"/><rect x="66" y="31" width="20" height="3" fill="#5fc0d6"/><path d="M88 34 l10 0 l0 12" stroke="#8a6a4a" stroke-width="1.5" fill="none"/></svg>';
   var SVGB='<svg viewBox="0 0 120 70" class="vill"><rect x="0" y="52" width="120" height="18" fill="#7fd3e0"/><path d="M0 52q30-10 60-8t60 4v6H0z" fill="#f1dfb5"/><path d="M8 50c2-14 2-24 0-34" stroke="#7a5a3a" stroke-width="2" fill="none"/><path d="M8 16c-8 0-12 4-14 8M8 16c8-2 14 2 16 6M8 16c-2-6 2-10 6-12" stroke="#3f8f4f" stroke-width="3" fill="none"/><rect x="40" y="26" width="50" height="20" fill="#f6efe2" stroke="#8a6a4a"/><path d="M35 27 65 12 95 27z" fill="#b8874f"/><rect x="58" y="34" width="12" height="12" fill="#8a6a4a"/><ellipse cx="103" cy="46" rx="9" ry="3" fill="#5fc0d6"/></svg>';
-  function vph(k){var P=(M.ai||{}).villa_ph||{};return P[k]?'<img class="vph" loading="lazy" src="'+esc(P[k])+'?s=600x400" alt="'+(k==='w'?'워터빌라':'비치빌라')+' 예시 사진">':'';}
+  function vph(k){var P=(M.ai||{}).villa_ph||{};return P[k]?'<img class="vph" loading="lazy" referrerpolicy="no-referrer" src="'+esc(P[k])+'?s=600x400" alt="'+(k==='w'?'워터빌라':'비치빌라')+' 예시 사진">':'';}
   function villaGuide(){
     var cmp=[['바다 입수','계단으로 바로','해변까지 걸어서'],['프라이버시','옆 빌라와 나란히','정원·나무로 가려짐'],['넓이','보통 더 작아요','보통 더 넓어요'],['그늘','적어요 (햇빛 강함)','야자수 그늘'],['가격','보통 더 비싸요','보통 더 싸요'],['이럴 때','바다 뷰·사진','휴식·조용함']];
     return '<div class="pl-card"><h3>'+ic('bed')+' 몰디브 리조트 기본: 빌라 종류</h3>'
@@ -1911,7 +1912,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
       var per=(pn!=null&&r.tru!=null&&r.tru>0)?'<div class="muted" style="font-size:13px">이동비까지 9박으로 나누면 1박 약 <b>'+(pn+Math.round(r.tru*2*((M.ai||{}).rate||1340)/9/10000))+'만</b></div>':'';
       return '<div class="smc" id="ai-'+r.id+'" data-v="'+vt+'" data-ai="'+(g.meal==='ai'&&!g.so?1:0)+'" data-boat="'+(rNightOk(r)?1:0)+'" data-in="'+(inb?1:0)+'" data-sp="'+(dineSp(r).length?1:0)+'"'+(inb?'':' hidden')+'>'
         +'<div class="smh"><span class="tn t5">'+no[r.id]+'</span><div><b>'+esc(r.ko)+'</b><small>'+esc(r.en)+'</small></div></div>'
-        +(r.ph?'<img class="smph" loading="lazy" src="'+esc(r.ph)+'?s=800x500" alt="'+esc(r.ko)+' 리조트 전경">':'')
+        +(r.ph?'<img class="smph" loading="lazy" referrerpolicy="no-referrer" src="'+esc(r.ph)+'?s=800x500" alt="'+esc(r.ko)+' 리조트 전경">':'')
         +price+per+hc
         +'<div class="kv2"><div><span>위치</span><b>'+aiRegName(r.reg)+'</b></div><div><span>이동</span><b>'+esc(r.tr)+'</b></div><div><span>이동비</span><b>'+esc(r.trc)+'</b></div></div>'
         +'<div class="smtags"><i class="'+nt[1]+'">'+nt[0]+'</i>'+rate+(ex.kr?'<i>'+esc(ex.kr)+'</i>':'')+(ex.mood?'<i>'+esc(ex.mood)+'</i>':'')+(inb?'':'<i class="ov">예산 초과</i>')+dineSp(r).map(function(x){return '<i class="sp">'+ic('spark',11)+esc(x[3])+' 식당</i>';}).join('')+'</div>'
@@ -1954,7 +1955,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var chips='<div class="chiprow sm-f" id="sg-f"><button type="button" class="chipx2 sm on" data-sgf="all">전체</button><button type="button" class="chipx2 sm" data-sgf="mb">마리나베이·시티홀</button><button type="button" class="chipx2 sm" data-sgf="oc">오차드 (쇼핑)</button><button type="button" class="chipx2 sm" data-sgf="bg">부기스</button><button type="button" class="chipx2 sm" data-sgf="p40">1박 40만 이하</button><button type="button" class="chipx2 sm" data-sgf="p70">40~70만</button></div>';
     var card=function(h){var g=h.ag||{},pv=g.tot&&!g.so?Math.round(g.tot/10000):h.pv;var pk=pv==null?'p99':pv<=40?'p40':pv<=70?'p70':'p99';var ar=h.ar==='ch'?'mb':h.ar;
       return '<div class="smc sgc" id="sg-'+h.id+'" data-ar="'+ar+'" data-pk="'+pk+'"><div class="smh"><span class="tn t5">'+no[h.id]+'</span><div><b>'+esc(h.ko)+'</b><small>'+esc(h.n)+'</small></div></div>'
-        +(h.ph?'<img class="smph" loading="lazy" src="'+esc(h.ph)+'?s=800x500" alt="'+esc(h.ko)+' 사진">':'')
+        +(h.ph?'<img class="smph" loading="lazy" referrerpolicy="no-referrer" src="'+esc(h.ph)+'?s=800x500" alt="'+esc(h.ko)+' 사진">':'')
         +(g.so?'<div class="smp2 so"><b>우리 날짜 매진</b><small>아고다 '+esc(g.d||'')+' 조회'+(h.p?' · 평소 1박 '+esc(h.p)+'원':'')+'</small></div>'
           :'<div class="smp2"><div><b>'+pv+'만</b><span>1박 · 세금 포함</span></div><div class="smp2-r"><small>아고다 10/20~22 · '+esc(g.d||'')+'</small></div></div>')
         +'<div class="kv2"><div><span>동네</span><b>'+esc(h.arn)+'</b></div><div><span>공항</span><b>택시 약 '+h.air+'분</b></div>'+(g.sc?'<div><span>평점</span><b>아고다 '+g.sc+'</b></div>':'')+'</div>'
