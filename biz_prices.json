@@ -59,6 +59,22 @@
    "level": null,
    "typical": null,
    "left": 247
+  },
+  {
+   "d": "2026-11-19",
+   "t": "09:38",
+   "n_all": 7,
+   "all_airlines": [
+    "싱가포르항공",
+    "에티하드항공"
+   ],
+   "min": 2178397,
+   "prices": {
+    "SQ 611 + SQ 438": 2178397
+   },
+   "level": null,
+   "typical": null,
+   "left": 246
   }
  ],
  "flights": {
@@ -100,9 +116,9 @@
      "min": 265
     }
    ],
-   "last": "2026-11-18"
+   "last": "2026-11-19"
   }
  },
  "google_history": [],
- "updated": "2026-11-18 09:39"
+ "updated": "2026-11-19 09:38"
 }
