@@ -1572,7 +1572,11 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   var LS={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
   var memStore={};
   function ldb(k,d){var v=LS.get(k,undefined);if(v!==undefined)return v;return memStore[k]!==undefined?memStore[k]:d;}
-  function sdb(k,v){memStore[k]=v;LS.set(k,v);if(k==='wp_sched'&&!SYNC_IN)syncSchedSoon();}
+  var SYNC_X=['wp_budget','wp_bk','wp_ck','wp_alert','wp_plan','my_resorts'];
+  function sdb(k,v){memStore[k]=v;LS.set(k,v);if((k==='wp_sched'||SYNC_X.indexOf(k)>=0)&&!SYNC_IN)syncSchedSoon();}
+  function xGet(){var o={};SYNC_X.forEach(function(k){try{var v=localStorage.getItem(k);if(v!=null)o[k]=v;}catch(e){}});return o;}
+  function xPut(o){if(!o)return;SYNC_X.forEach(function(k){if(typeof o[k]==='string'){try{localStorage.setItem(k,o[k]);}catch(e){}delete memStore[k];}});BUD=null;}
+  function putSrvSched(sc){if(!sc)return;var c=Object.assign({},sc);if(c._x){xPut(c._x);delete c._x;}sdb('wp_sched',c);}
   function ME(){return ldb('wp_me','A');}
   function OT(){return ME()==='A'?'B':'A';}
   function items(){return ldb('wp_items',{});}
@@ -1807,7 +1811,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   }
   var TIERC={'가성비 4성':'t4','5성':'t5','럭셔리':'tl'};
   function ckGet(){try{return JSON.parse(localStorage.getItem('wp_ck')||'{}')||{};}catch(e){return {};}}
-  document.addEventListener('change',function(e){var x=e.target;if(!x||!x.getAttribute||!x.getAttribute('data-ck'))return;var c=ckGet();c[x.getAttribute('data-ck')]=x.checked?1:0;try{localStorage.setItem('wp_ck',JSON.stringify(c));}catch(_){}var g=x.closest('.ckl');if(g){var a=g.querySelectorAll('input[data-ck]'),n=0;for(var i=0;i<a.length;i++)if(a[i].checked)n++;var s=g.querySelector('.ckn');if(s)s.textContent=n+' / '+a.length;}});
+  document.addEventListener('change',function(e){var x=e.target;if(!x||!x.getAttribute||!x.getAttribute('data-ck'))return;var c=ckGet();c[x.getAttribute('data-ck')]=x.checked?1:0;try{localStorage.setItem('wp_ck',JSON.stringify(c));}catch(_){}if(!SYNC_IN)syncSchedSoon();var g=x.closest('.ckl');if(g){var a=g.querySelectorAll('input[data-ck]'),n=0;for(var i=0;i<a.length;i++)if(a[i].checked)n++;var s=g.querySelector('.ckn');if(s)s.textContent=n+' / '+a.length;}});
   function ckList(id,items){var c=ckGet(),n=0;var h=items.map(function(it,i){var k=id+':'+i,on=!!c[k];if(on)n++;return '<label class="ck"><input type="checkbox" data-ck="'+k+'"'+(on?' checked':'')+'><span><b>'+esc(it[0])+'</b>'+(it[1]?'<small>'+dotL(it[1])+'</small>':'')+(it[2]?'<em>'+esc(it[2])+'</em>':'')+'</span></label>';}).join('');
     return '<div class="ckl"><div class="ckh">'+ic('check',13)+'체크한 것 <b class="ckn">'+n+' / '+items.length+'</b> <small>이 휴대폰에만 저장돼요</small></div>'+h+'</div>';}
   function nightArr(N){return '<div class="tl3 na">'+N.tl.map(function(x){return '<div><b>'+esc(x[0])+'</b><span>'+esc(x[1])+(x[2]?' · '+esc(x[2]):'')+'</span></div>';}).join('')+'</div><div class="muted" style="font-size:12px;margin:2px 0 6px">시각은 2026년 운항 기준이에요. 리조트 도착 시각은 보트 거리에 따라 달라요.</div>'
@@ -2130,7 +2134,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   function spStrip(L,no){var A=[];L.forEach(function(r){dineSp(r).forEach(function(x){A.push([r,x]);});});if(!A.length)return '';
     return '<div class="spx"><div class="spx-h">'+ic('spark',14)+'이 식당 때문에 고를 만한 곳</div><div class="spx-l">'+A.map(function(z){var r=z[0],x=z[1],t=INCN[x[2]]||INCN['?'];return '<a href="#ai-'+r.id+'" class="spx-c"><b>'+esc(x[0])+'</b><small>'+esc(x[1])+'</small><span><span class="tn t5">'+no[r.id]+'</span>'+esc(r.ko)+'</span><i class="inc '+t[1]+'">'+t[0]+'</i></a>';}).join('')+'</div></div>';}
   function myResGet(){try{return JSON.parse(localStorage.getItem('my_resorts')||'[]')||[];}catch(e){return [];}}
-  function myResSet(a){try{localStorage.setItem('my_resorts',JSON.stringify(a));}catch(e){}}
+  function myResSet(a){try{localStorage.setItem('my_resorts',JSON.stringify(a));}catch(e){}if(!SYNC_IN)syncSchedSoon();}
   function myResHtml(){var A=myResGet();
     var cards=A.map(function(x,i){var q=encodeURIComponent(x.n+' Maldives');return '<div class="smc my" data-v="" data-boat="0" data-in="1" data-sp="0"><div class="smh"><span class="tn t5">+</span><div><b>'+esc(x.n)+'</b><small>직접 추가 · '+esc(x.d||'')+'</small></div></div>'
       +'<div class="smtags"><i>정보 비어 있음</i><i>이 폰에만 저장</i></div>'
@@ -2443,7 +2447,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   // ---- v16: 준비 현황 ----
   function BKL(){return [['out','출국 항공권','10/11 아침 11:05 · SQ611+SQ438 비즈니스 편도','plane'],['ret','귀국 항공권','말레→싱가포르→인천 다구간','plane'],['resort','몰디브 리조트','9박 · 허니문 혜택 조건 확인','bed'],['trans','리조트 이동편 확정','수상비행기/보트 · 도착편 알리기','boat'],['sghotel','싱가포르 호텔','10/20~10/22 · 2박','bed'],['ins','여행자 보험','두 사람 모두','check'],['cert','결혼 증명 서류','허니문 혜택용 (영문)','heart'],['esim','휴대폰 eSIM·로밍','몰디브·싱가포르','info']];}
   function bkGet(){try{return JSON.parse(localStorage.getItem('wp_bk')||'{}')||{};}catch(e){return {};}}
-  function bkSet(o){try{localStorage.setItem('wp_bk',JSON.stringify(o));}catch(e){}}
+  function bkSet(o){try{localStorage.setItem('wp_bk',JSON.stringify(o));}catch(e){}if(!SYNC_IN)syncSchedSoon();}
 
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-bk]');if(!b)return;var o=bkGet(),k=b.getAttribute('data-bk'),x=o[k]||{};x.s=((x.s||0)+1)%3;o[k]=x;bkSet(o);if(window.renderFlightCards)window.renderFlightCards();});
   document.addEventListener('change',function(e){var x=e.target;if(!x||!x.getAttribute)return;var k=x.getAttribute('data-bkm');if(k){var o=bkGet(),y=o[k]||{};y.m=x.value.slice(0,120);o[k]=y;bkSet(o);}var d=x.getAttribute('data-dep');if(d){try{localStorage.setItem('wp_dep',x.value);}catch(_){}if(window.renderFlightCards)window.renderFlightCards();}});
@@ -2997,7 +3001,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
       +'<div class="sync-row"><input class="memo" id="trip-in" type="password" autocomplete="off" placeholder="우리 여행 코드" aria-label="우리 여행 코드"><button type="button" class="btn" id="trip-go">'+ic('check')+' 연결하기</button></div><div class="muted" id="trip-msg" role="status" style="font-size:12.5px">'+esc(SYNC_MSG)+'</div></div>';
     return '<div class="pl-card sync on"><h3>'+ic('check')+' 둘이 같이 보는 중</h3><div class="vz1 sm">♥·메모·일정이 자동으로 맞춰져요.'+(SYNC_AT?' 마지막으로 맞춘 때 <b class="nm">'+esc(SYNC_AT)+'</b>':'')+'</div><div class="muted" style="font-size:12.5px">'+esc(SYNC_MSG)+'</div><div class="cx"><button type="button" class="cxi sm" id="trip-now" style="border:0;cursor:pointer;font:inherit">지금 맞추기</button><button type="button" class="cxi sm" id="trip-off" style="border:0;cursor:pointer;font:inherit">이 휴대폰 연결 끊기</button></div></div>';
   }
-  function rerenderSync(){var h=location.hash.slice(1),y=window.scrollY;if(h==='saved')window.renderPlan();else if(h==='sched')window.renderSched();else if(h==='flights'&&window.renderFlightCards)window.renderFlightCards();
+  function rerenderSync(){var h=location.hash.slice(1),y=window.scrollY;if(h==='saved')window.renderPlan();else if(h==='sched')window.renderSched();else if(h==='flights'&&window.renderFlightCards)window.renderFlightCards();else if(h==='budget')homeBud();else if(h==='home'||h===''){homeBiz();homeBud();}
     var o=items(),me=ME();document.querySelectorAll('.heart').forEach(function(b){var it=o[b.getAttribute('data-id')],on=!!(it&&it.v&&it.v[me]);b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.textContent=on?'♥':'♡';});window.scrollTo(0,y);}
   function stamp(){var d=new Date();SYNC_AT=(d.getMonth()+1)+'/'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
   function syncPull(first){
@@ -3009,11 +3013,11 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
       var loc=items(),srv=j.items||{},me=ME(),push=[];
       if(first){Object.keys(loc).forEach(function(id){var it=loc[id];if(it.v&&it.v[me]&&!(srv[id]&&srv[id].v&&srv[id].v[me]))push.push(it);});}
       putItems(srv);
-      var lsv=ldb('wp_sv',-1),ls=ldb('wp_sched',null),hasLoc=ls&&ls.d&&Object.keys(ls.d).some(function(k){var d=ls.d[k];return d&&(d.city||d.stay||(d.items&&d.items.length));});
+      var lsv=ldb('wp_sv',-1),ls=ldb('wp_sched',null),hasLoc=ls&&ls.d&&Object.keys(ls.d).some(function(k){var d=ls.d[k];return d&&(d.stay||(d.items&&d.items.length));})||Object.keys(xGet()).length>0;
       if(first&&hasLoc&&(!j.sched||j.sv!==lsv)){
-        if(!j.sched||confirm('서버에 이미 일정이 있어요.\n[확인] 서버 일정으로 바꾸기\n[취소] 이 휴대폰 일정을 서버에 올리기')){if(j.sched){sdb('wp_sched',j.sched);sdb('wp_sv',j.sv);}else{SYNC_IN=false;pushSched(true);SYNC_IN=true;}}
+        if(!j.sched||confirm('서버에 이미 일정이 있어요.\n[확인] 서버 일정으로 바꾸기\n[취소] 이 휴대폰 일정을 서버에 올리기')){if(j.sched){putSrvSched(j.sched);sdb('wp_sv',j.sv);}else{SYNC_IN=false;pushSched(true);SYNC_IN=true;}}
         else{SYNC_IN=false;pushSched(true);SYNC_IN=true;}
-      }else if(j.sched&&j.sv!==lsv){sdb('wp_sched',j.sched);sdb('wp_sv',j.sv);}
+      }else if(j.sched&&j.sv!==lsv){putSrvSched(j.sched);sdb('wp_sv',j.sv);}
       SYNC_IN=false;stamp();SYNC_MSG='';
       api('/docs').then(function(dj){if(dj._s===200&&dj.docs){var loc=ldb('wp_docs',[]),keep=loc.filter(function(x){return x.local;}),mine={};loc.forEach(function(x){mine[x.id]=x;});sdb('wp_docs',keep.concat(dj.docs.map(function(x){var m=mine[x.id];return (m&&typeof m.img==='string')?Object.assign({},x,{img:m.img}):x;})));}}).catch(function(){});
       push.forEach(function(it){syncHeart(it.id,{k:it.k,t:it.t,c:it.c,val:true,memo:(it.m&&it.m[me])||''});});
@@ -3026,10 +3030,10 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
   }
   function syncSchedSoon(){if(!SYNC_ON())return;clearTimeout(SYNC_T);SYNC_T=setTimeout(function(){pushSched(false);},900);}
   function pushSched(force){
-    if(!SYNC_ON())return;var sc=ldb('wp_sched',null);if(!sc)return;
-    api('/sched',{method:'PUT',body:JSON.stringify({sched:sc,base:force?null:ldb('wp_sv',null),who:ME()})}).then(function(j){
+    if(!SYNC_ON())return;var sc=ldb('wp_sched',null)||{d:{}};
+    api('/sched',{method:'PUT',body:JSON.stringify({sched:Object.assign({},sc,{_x:xGet()}),base:force?null:ldb('wp_sv',null),who:ME()})}).then(function(j){
       if(j._s===200){SYNC_IN=true;sdb('wp_sv',j.sv);SYNC_IN=false;stamp();}
-      else if(j._s===409){SYNC_IN=true;sdb('wp_sched',j.sched);sdb('wp_sv',j.sv);SYNC_IN=false;SYNC_MSG='상대가 먼저 일정을 고쳐서 최신 일정으로 바꿨어요. 방금 고친 내용은 다시 넣어 주세요.';rerenderSync();}
+      else if(j._s===409){SYNC_IN=true;putSrvSched(j.sched);sdb('wp_sv',j.sv);SYNC_IN=false;SYNC_MSG='상대가 먼저 일정을 고쳐서 최신 일정으로 바꿨어요. 방금 고친 내용은 다시 넣어 주세요.';rerenderSync();}
     }).catch(function(){SYNC_MSG='일정을 서버에 못 보냈어요. 인터넷 연결을 확인해 주세요.';});
   }
   document.addEventListener('click',function(e){
