@@ -5,7 +5,7 @@
  "cabin": "business",
  "per": "1인 편도",
  "currency": "KRW",
- "rule": "모든 항공사 · 16시간 미만 · 인천 13:00 전 출발",
+ "rule": "싱가포르항공·대한항공(연결편 포함) · 16시간 미만 · 인천 13:00 전 출발",
  "days": [
   {
    "d": "2026-11-16",
@@ -99,6 +99,17 @@
    "level": null,
    "typical": null,
    "left": 245
+  },
+  {
+   "d": "2026-11-21",
+   "t": "09:38",
+   "n_all": 0,
+   "all_airlines": [],
+   "min": null,
+   "prices": {},
+   "level": null,
+   "typical": null,
+   "left": 244
   }
  ],
  "flights": {
@@ -264,5 +275,5 @@
   }
  },
  "google_history": [],
- "updated": "2026-11-20 16:22"
+ "updated": "2026-11-21 09:38"
 }
