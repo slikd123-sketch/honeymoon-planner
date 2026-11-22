@@ -2681,8 +2681,7 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var tot='<div class="pl-card nv"><div class="nv-tot"><div><small>2인 항공권 합계 · 고른 편</small><b>'+(po&&pr?wonM((po.price+pr.price)*2):'-')+'</b></div><small style="color:var(--muted);font-size:12px">'+esc((N.checked||'').slice(5).replace('-','/'))+' 네이버</small></div>'
       +'<div class="nv-br"><span>'+(po?'출국 '+esc(airList(po.air)[0])+' '+esc(po.dep)+' · 1인 '+wonM(po.price):'출국 미선택')+'</span><span>'+(pr?'귀국 '+esc(pr.dep)+' 출발 · 1인 '+wonM(pr.price):'귀국 미선택')+'</span></div></div>';
     var out='<div class="pl-card nv"><div class="nv-sec">'+ic('plane',16)+'출국 <small>10/11 (월) 인천 → 말레 · 비즈니스</small></div>'
-      +(o.fit||[]).slice(0,4).map(function(x,i){return nvRow(x,i===0);}).join('')
-      +((o.cheap||[]).length?'<details class="rmore"><summary>조건 밖 더 싼 편 '+o.cheap.length+'개</summary>'+o.cheap.map(function(x){return nvRow(x,false);}).join('')+'</details>':'')
+      +(po?nvRow(po,true).replace(' data-nvsel="out"','').replace(' role="button"','').replace('<span class="nvr">선택</span>','<span class="nvr">선택됨</span>').replace(' class="nvf best"',' class="nvf best sel"'):'<div class="nvg">오늘 목록에 고른 출국편(싱가포르항공 11:05)이 없어요. 네이버에서 확인해 주세요.</div>')
       +'<a class="btn krd-ag" href="'+esc(o.url)+'" target="_blank" rel="noopener noreferrer">'+ic('plane',15)+'네이버에서 출국편 보기</a></div>';
     var ret='';if(r){var L=r.legs||[],l1=L[0]||[],l2=L[1]||[];
       var m1=String(l1[2]||'').match(/^(SQ\s?\d*)\s+(\d\d:\d\d)\s*→\s*(\d\d:\d\d)\s*·?\s*(.*)$/);
@@ -2701,7 +2700,6 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
           +'</div><div class="nvp"><b>'+wonM(x.price)+'</b><small>1인</small><span class="nvr">'+(sel?'선택됨':'선택')+'</span></div>'+card3Html(AL.cards,'')+'</div>';}).join(''):'';
       ret='<div class="pl-card nv"><div class="nv-sec">'+ic('plane',16)+'귀국 <small>다구간 1장 · 싱가포르항공</small></div>'
         +'<div class="nvg">확정 · 10/19 23:10 말레 출발 → 10/22 싱가포르 출발 (08:10 또는 14:55)</div>'+rows
-        +(rows2?'<div class="nvg">1구간 23:10 출발 · 싱가포르 10/21 아침 도착 <small>싱가포르 호텔 1박이 줄어요</small></div>'+rows2:'')
         +'<a class="btn krd-ag" href="'+esc(r.url)+'" target="_blank" rel="noopener noreferrer">'+ic('plane',15)+'네이버에서 귀국 다구간 보기</a></div>';}
     var spark=function(lab,pts,col){if(pts.length<2)return '<div class="trd2"><b>'+lab+'</b><span class="muted">'+(pts.length?'기록 '+pts.length+'일 · 이틀 이상 모이면 그래프가 그려져요':'아직 기록이 없어요')+'</span></div>';
         var W=320,Hh=90,pd=10,v=pts.map(function(x){return x[1];}),mx=Math.max.apply(null,v),mn=Math.min.apply(null,v),n=pts.length;
