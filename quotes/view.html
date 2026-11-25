@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>견적서 보기</title>
+<style>
+:root{--bg:#F4F1EA;--card:#fff;--ink:#1F2A2E;--muted:#6B7478;--line:#E2DDD2;--acc:#0B7A75}
+@media (prefers-color-scheme:dark){:root{--bg:#121617;--card:#1B2123;--ink:#E9ECEC;--muted:#9AA3A6;--line:#2C3437;--acc:#4FB3AD}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:14px;font-weight:700;text-decoration:none;cursor:pointer}
+.back svg{width:18px;height:18px}
+.ttl{flex:1;min-width:0;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl{color:var(--acc);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+#pages{padding:12px 16px 40px;display:flex;flex-direction:column;gap:12px;align-items:center}
+canvas{width:100%;max-width:900px;height:auto;background:#fff;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.msg{padding:40px 16px;text-align:center;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a class="back" id="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>돌아가기</a>
+  <div class="ttl" id="ttl">허니문리조트 견적서</div>
+  <a class="dl" id="dl" href="#" target="_blank" rel="noopener">파일 열기</a>
+</div>
+<div id="pages"><div class="msg">견적서 불러오는 중…</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function(){
+  var b=document.getElementById('back');
+  b.addEventListener('click',function(e){if(history.length>1){e.preventDefault();history.back();}});
+  var q=new URLSearchParams(location.search),f=(q.get('f')||'').replace(/[^a-z0-9_-]/gi,''),nm=q.get('n')||'';
+  if(nm)document.getElementById('ttl').textContent=nm+' · 허니문리조트 견적서';
+  var box=document.getElementById('pages');
+  if(!f){box.innerHTML='<div class="msg">견적서를 찾지 못했어요.</div>';return;}
+  var url=f+'.pdf';document.getElementById('dl').href=url;
+  if(!window.pdfjsLib){box.innerHTML='<div class="msg">보기 도구를 못 불러왔어요. 오른쪽 위 "파일 열기"를 눌러 주세요.</div>';return;}
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  pdfjsLib.getDocument(url).promise.then(function(pdf){
+    box.innerHTML='';var dpr=Math.min(window.devicePixelRatio||1,2),w=Math.min(box.clientWidth-32,900);
+    var n=1;(function next(){if(n>pdf.numPages)return;pdf.getPage(n).then(function(pg){
+      var v0=pg.getViewport({scale:1}),v=pg.getViewport({scale:w/v0.width*dpr}),c=document.createElement('canvas');
+      c.width=v.width;c.height=v.height;box.appendChild(c);
+      pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise.then(function(){n++;next();});});})();
+  }).catch(function(){box.innerHTML='<div class="msg">견적서를 못 열었어요. 오른쪽 위 "파일 열기"를 눌러 주세요.</div>';});
+})();
+</script>
+</body>
+</html>
