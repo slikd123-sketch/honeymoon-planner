@@ -1948,12 +1948,18 @@ var FD=[{"c":"maldives","n":"몰디브","d":"out","dep":"09/05|12:20","arr":"09/
     var L=(d.L||[]).map(function(x){var t=INCN[x[2]]||INCN['?'];return '<div class="dnr"><div><b>'+esc(x[0])+'</b><small>'+esc(x[1])+'</small></div><i class="inc '+t[1]+'">'+t[0]+'</i></div>';}).join('');
     return '<details class="rmore dnd"><summary>'+ic('fork',14)+' '+esc(d.n)+'</summary><div class="dn-inc">'+esc(d.inc)+'</div>'+L+(d.memo?'<div class="muted" style="font-size:12px">'+esc(d.memo)+'</div>':'')
       +(d.src||[]).map(function(x){return '<a class="back" href="'+esc(x[1])+'" target="_blank" rel="noopener noreferrer">출처: '+esc(x[0])+' &#8599;</a>';}).join('')+'</details>';}
-  function phU(u,sz){return /pix8\.agoda\.net/.test(u)&&u.indexOf('?')<0?u+'?s='+sz:u;}
+  function phU(u,sz){u=String(u||'');var w=/^1/.test(sz||'')&&String(sz).length>8?1600:1200;
+    if(/pix8\.agoda\.net/.test(u)&&u.indexOf('?')<0)return u+'?s='+sz;
+    if(/www\.hilton\.com\/im\//.test(u)&&u.indexOf('?')<0)return u+'?impolicy=crop&cw=4000&ch=2667&gravity=NorthWest&xposition=0&yposition=0&rw=1200&rh=800';   // 그냥 주소는 흑백 대기 이미지
+    if(/hiltonstatic\.com\/.*\/image\/upload\/Imagery/.test(u))return u.replace('/image/upload/','/image/upload/w_'+w+',q_auto/');
+    if(/bfldr\.constancehotels\.com/.test(u)&&u.indexOf('?')<0)return u+'?width='+w;
+    if(/centarahotelsresorts\.com\/.*\/files\//.test(u))return 'https://wsrv.nl/?url='+encodeURIComponent(u)+'&w='+w;   // 원본 15~50MB라 줄여서
+    return u;}
   function galHtml(r){var L=(r.ph?[[r.ph,'전경']]:[]).concat(r.gal||[]);if(!L.length)return '';
     return '<div class="rgal">'+L.map(function(x,i){return '<figure'+(i===0?' class="g0"':'')+'><img loading="lazy" referrerpolicy="no-referrer" src="'+esc(phU(x[0],i===0?'800x500':'600x400'))+'" alt="'+esc((r.ko||r.n||'')+' '+x[1])+'"><figcaption>'+esc(x[1])+(i===0?' · 옆으로 넘겨 '+L.length+'장':'')+'</figcaption></figure>';}).join('')+'</div><div class="muted" style="font-size:12px">사진: '+(r.gsrc||'아고다')+' 숙소 사진</div>';}
   // 사진 크게 보기: 갤러리 사진을 누르면 화면 가득 · 옆으로 넘기기 · 닫기(뒤로가기도 닫힘)
   (function(){var ov=null,L=[],k=0,x0=null;
-    function big(u){return /pix8\.agoda\.net/.test(u)?u.replace(/\?s=.*$/,'')+'?s=1600x1000':u;}
+    function big(u){return /pix8\.agoda\.net/.test(u)?u.replace(/\?s=.*$/,'')+'?s=1600x1000':u.replace(/w_1200,/,'w_1600,').replace(/([?&])(width|w)=1200/,'$1$2=1600');}
     function draw(){if(!ov)return;var it=L[k];ov.querySelector('img').src=big(it[0]);ov.querySelector('.lbx-c').textContent=(it[1]||'')+'  '+(k+1)+' / '+L.length;}
     function close(fromPop){if(!ov)return;ov.remove();ov=null;document.body.style.overflow='';if(!fromPop&&history.state&&history.state.lbx)history.back();}
     function open(list,i){L=list;k=i;ov=document.createElement('div');ov.className='lbx';
